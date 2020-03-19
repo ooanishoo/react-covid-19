@@ -23,11 +23,11 @@ export default function Header() {
     <Parallax
       blur={{ min: -15, max: 15 }}
       bgImage={url}
-      bgImageAlt="the dog"
+      bgImageAlt="COVID-19"
       strength={500}
     >
       <div style={styles.banner}>
-        <h1 style={styles.title}>Covid-19</h1>
+        <h1 style={styles.title}>COVID-19</h1>
       </div>
     </Parallax>
   );
