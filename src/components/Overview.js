@@ -8,7 +8,7 @@ export default function Overview() {
 
   const styles = {
     container: {
-      backgroundColor: "#2A282B",
+      backgroundColor: "#2F1F1F1",
       color:"white"
     },
     title: { textAlign: "center", marginTop:0, paddingTop:10 },
@@ -17,7 +17,7 @@ export default function Overview() {
       flexDirection: "row",
       justifyContent: "space-around",
       flexWrap: "wrap",
-      backgroundColor: "#2A282B"
+      backgroundColor: "#F1F1F1"
     },
     case: {
     },
