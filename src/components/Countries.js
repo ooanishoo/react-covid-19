@@ -15,6 +15,7 @@ export default function Countries() {
   console.log(data2);
 
   const styles = {
+    wrapper: { textAlign: "center", marginTop: 20},
     container: {
       display: "flex",
       flexDirection: "row",
@@ -52,7 +53,7 @@ export default function Countries() {
   if (!data)
     return (
       <div>
-        <div style={{ textAlign: "center" }}>
+        <div style={styles.wrapper}>
           <h1>Countries Data</h1>
         </div>
         <div style={styles.container}>
@@ -68,7 +69,7 @@ export default function Countries() {
   const countries = data;
   return (
     <div>
-      <div style={{ textAlign: "center" }}>
+      <div style={styles.wrapper}>
         <h1>Countries Data</h1>
       </div>
       <div style={styles.selector}>

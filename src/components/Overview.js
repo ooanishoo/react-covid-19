@@ -8,21 +8,21 @@ export default function Overview() {
 
   const styles = {
     container: {
-      backgroundColor: "#2F1F1F1",
+      backgroundColor: "#12191E",
       color:"white"
     },
-    title: { textAlign: "center", marginTop:0, paddingTop:10 },
+    title: { textAlign: "center", marginTop:0, paddingTop:10 , color:"#F5F5F5"},
     cases: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
       flexWrap: "wrap",
-      backgroundColor: "#F1F1F1"
+      backgroundColor: "#12191E"
     },
     case: {
     },
     confirmed:{
-      color:"#F98705",
+      color:"#FF5302",
       textAlign: "center"
     },
     deaths:{
@@ -39,20 +39,20 @@ export default function Overview() {
   return (
     <div style={styles.container}>
       <div style={styles.title}>
-        <h1>Overview</h1>
+        <h1 style={styles.title}>Overview</h1>
       </div>
       <div style={styles.cases}>
         <div style={styles.confirmed}>
-          <p>Confirmed</p>
-          <h1>{data.confirmed.value}</h1>
+          <h3 style={styles.confirmed}>Confirmed</h3>
+          <h1 style={styles.confirmed}>{data.confirmed.value}</h1>
         </div>
         <div style={styles.deaths}>
-          <p>Deaths</p>
-          <h1>{data.deaths.value}</h1>
+          <h3 style={styles.deaths}>Deaths</h3>
+          <h1 style={styles.deaths}>{data.deaths.value}</h1>
         </div>
         <div style={styles.recovered}>
-          <p>Recovered</p>
-          <h1>{data.recovered.value}</h1>
+          <h3 style={styles.recovered}>Recovered</h3>
+          <h1 style={styles.recovered}>{data.recovered.value}</h1>
         </div>
         {/* <div>
           <h3>Updated</h3>
