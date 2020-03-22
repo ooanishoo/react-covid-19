@@ -15,11 +15,11 @@ export default function Countries() {
   console.log(data2);
 
   const styles = {
-    wrapper: { textAlign: "center", marginTop: 20},
+    wrapper: { textAlign: "center", marginTop: 20, marginLeft: 5 },
     container: {
       display: "flex",
       flexDirection: "row",
-      justifyContent: "space-evenly",
+      justifyContent: "space-between",
       margin: "auto",
       width: "90%",
       flexWrap: "wrap"
@@ -30,7 +30,9 @@ export default function Countries() {
     },
     selector: {
       display: "flex",
-      justifyContent: "center"
+      justifyContent: "center",
+      marginLeft:5,
+      marginRight:5
     }
   };
 
@@ -69,53 +71,66 @@ export default function Countries() {
   const countries = data;
   return (
     <div>
-      <div style={styles.wrapper}>
-        <h1>Countries Data</h1>
-      </div>
-      <div style={styles.selector}>
-        <Select
-          showSearch
-          style={{ width: 200 }}
-          placeholder="Select a country"
-          optionFilterProp="children"
-          onChange={onChange}
-          onFocus={onFocus}
-          onBlur={onBlur}
-          onSearch={onSearch}
-          filterOption={(input, option) =>
-            option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-          }
-        >
-          {Object.entries(data2.countries).map(([country, code]) => {
-            return <Option value={code}>{country}</Option>;
-          })}
-        </Select>
-      </div>
-      <div style={styles.container}>
-        {countries.map(country => (
-          <Card
-            style={styles.card}
-            actions={[
-              <p>
-                Deaths <p>{country.deaths}</p>
-              </p>,
-              <p>
-                Critical <p>{country.critical}</p>
-              </p>,
-              <p>
-                Recovered <p>{country.recovered}</p>
-              </p>
-            ]}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
+          alignItems: "center",
+          margin: "auto",
+          width: "90%"
+        }}
+      >
+        <div style={styles.wrapper}>
+          <h1>Countries Data</h1>
+        </div>
+        <div style={styles.selector}>
+          <Select
+            showSearch
+            style={{ width: 200 }}
+            placeholder="Select a country"
+            optionFilterProp="children"
+            onChange={onChange}
+            onFocus={onFocus}
+            onBlur={onBlur}
+            onSearch={onSearch}
+            filterOption={(input, option) =>
+              option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+            }
           >
-            <Meta
-              avatar={
-                <Avatar src="https://www.countryflags.io/be/flat/64.png" />
-              }
-              title={country.country}
-              description="This is the description"
-            />
-          </Card>
-        ))}
+            {Object.entries(data2.countries).map(([country, code]) => {
+              return <Option value={code}>{country}</Option>;
+            })}
+          </Select>
+        </div>
+      </div>
+      <div>
+        <div style={styles.container}>
+          {countries.map(country => (
+            <Card
+              style={styles.card}
+              actions={[
+                <p>
+                  Deaths <p>{country.deaths}</p>
+                </p>,
+                <p>
+                  Critical <p>{country.critical}</p>
+                </p>,
+                <p>
+                  Recovered <p>{country.recovered}</p>
+                </p>
+              ]}
+            >
+              <Meta
+                avatar={
+                  <Avatar src="https://www.countryflags.io/be/flat/64.png" />
+                }
+                title={country.country}
+                description="This is the description"
+              />
+            </Card>
+          ))}
+        </div>
       </div>
     </div>
   );

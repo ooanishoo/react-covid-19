@@ -22,7 +22,7 @@ export default function Overview() {
     case: {
     },
     confirmed:{
-      color:"#FF5302",
+      color:"#FFC108",
       textAlign: "center"
     },
     deaths:{
