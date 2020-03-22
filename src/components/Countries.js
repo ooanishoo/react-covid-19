@@ -15,7 +15,21 @@ export default function Countries() {
   console.log(data2);
 
   const styles = {
-    wrapper: { textAlign: "center", marginTop: 20, marginLeft: 5 },
+    header: {
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "space-between",
+      alignItems: "center",
+      margin: "auto",
+      width: "90%"
+    },
+    title: { textAlign: "center", marginTop: 20, marginLeft: 5 },
+    selector: {
+      display: "flex",
+      justifyContent: "center",
+      marginLeft: 5,
+      marginRight: 5
+    },
     container: {
       display: "flex",
       flexDirection: "row",
@@ -27,12 +41,6 @@ export default function Countries() {
     card: {
       margin: 5,
       width: 300
-    },
-    selector: {
-      display: "flex",
-      justifyContent: "center",
-      marginLeft:5,
-      marginRight:5
     }
   };
 
@@ -55,8 +63,27 @@ export default function Countries() {
   if (!data)
     return (
       <div>
-        <div style={styles.wrapper}>
-          <h1>Countries Data</h1>
+        <div style={styles.header}>
+          <div style={styles.title}>
+            <h1>Countries Data</h1>
+          </div>
+          <div style={styles.selector}>
+            <Select
+              showSearch
+              style={{ width: 200 }}
+              placeholder="Select a country"
+              optionFilterProp="children"
+              onChange={onChange}
+              onFocus={onFocus}
+              onBlur={onBlur}
+              onSearch={onSearch}
+              filterOption={(input, option) =>
+                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
+              }
+            >
+              
+            </Select>
+          </div>
         </div>
         <div style={styles.container}>
           {[...Array(186)].map((e, i) => (
@@ -71,17 +98,8 @@ export default function Countries() {
   const countries = data;
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-          alignItems: "center",
-          margin: "auto",
-          width: "90%"
-        }}
-      >
-        <div style={styles.wrapper}>
+      <div style={styles.header}>
+        <div style={styles.title}>
           <h1>Countries Data</h1>
         </div>
         <div style={styles.selector}>
