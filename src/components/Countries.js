@@ -1,18 +1,17 @@
-import React from "react";
-import GetStats from "../utils/GetStats";
+import React, { useState, useEffect } from "react";
 import { Card, Avatar, Select, Skeleton } from "antd";
 import "antd/dist/antd.css";
+import { fetchCountryData } from "../api";
 
 const { Meta } = Card;
 const { Option } = Select;
 
-export default function Countries() {
-  const url = "https://corona.lmao.ninja/countries";
-  //const url = "https://coronavirus-tracker-api.herokuapp.com/v2/locations";
-  const url2 = "https://covid19.mathdro.id/api/countries";
-  const data = GetStats(url);
-  const data2 = GetStats(url2);
-  console.log(data2);
+export default function Countries({ countries }) {
+  const [search, setSearch] = useState("");
+  const [country, setCountry] = useState({});
+
+  const { confirmed = 0, deaths = 0, recovered = 0 } = country;
+  const [isLoading, setIsLoading] = useState(false);
 
   const styles = {
     header: {
@@ -21,14 +20,14 @@ export default function Countries() {
       justifyContent: "space-between",
       alignItems: "center",
       margin: "auto",
-      width: "90%"
+      width: "90%",
     },
     title: { textAlign: "center", marginTop: 20, marginLeft: 5 },
     selector: {
       display: "flex",
       justifyContent: "center",
       marginLeft: 5,
-      marginRight: 5
+      marginRight: 5,
     },
     container: {
       display: "flex",
@@ -36,66 +35,36 @@ export default function Countries() {
       justifyContent: "space-between",
       margin: "auto",
       width: "90%",
-      flexWrap: "wrap"
+      flexWrap: "wrap",
     },
     card: {
-      margin: 5,
-      width: 300
-    }
+      margin: 'auto',
+      width: '70%',
+    },
   };
 
   function onChange(value) {
     console.log(`selected country ${value}`);
+    setSearch(value);
   }
 
-  function onBlur() {
-    console.log("blur");
-  }
+  // fetch a country's data on search
+  useEffect(() => {
+    console.log(search, "search is");
+    if (search.trim !== "") {
+      setIsLoading(true);
 
-  function onFocus() {
-    console.log("focus");
-  }
+      setTimeout(() => {
+        fetchCountryData(search)
+          .then(
+            (data) => setCountry(data)
+            //(data) => console.log({ data })
+          )
+          .finally(setIsLoading(false));
+      }, 100);
+    }
+  }, [search]);
 
-  function onSearch(val) {
-    console.log("searching country :", val);
-  }
-
-  if (!data)
-    return (
-      <div>
-        <div style={styles.header}>
-          <div style={styles.title}>
-            <h1>Countries Data</h1>
-          </div>
-          <div style={styles.selector}>
-            <Select
-              showSearch
-              style={{ width: 200 }}
-              placeholder="Select a country"
-              optionFilterProp="children"
-              onChange={onChange}
-              onFocus={onFocus}
-              onBlur={onBlur}
-              onSearch={onSearch}
-              filterOption={(input, option) =>
-                option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
-              }
-            >
-              
-            </Select>
-          </div>
-        </div>
-        <div style={styles.container}>
-          {[...Array(186)].map((e, i) => (
-            <Card style={styles.card}>
-              <Skeleton active avatar />
-            </Card>
-          ))}
-          });
-        </div>
-      </div>
-    );
-  const countries = data;
   return (
     <div>
       <div style={styles.header}>
@@ -106,50 +75,54 @@ export default function Countries() {
           <Select
             showSearch
             style={{ width: 200 }}
-            placeholder="Select a country"
+            placeholder="Search Country"
             optionFilterProp="children"
             onChange={onChange}
-            onFocus={onFocus}
-            onBlur={onBlur}
-            onSearch={onSearch}
             filterOption={(input, option) =>
               option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0
             }
           >
-            {Object.entries(data2.countries).map(([country, code]) => {
-              return <Option value={code}>{country}</Option>;
-            })}
+            {countries.map(({ name, iso2 }) => (
+              <Option key={name} value={name}>
+                {name}
+              </Option>
+            ))}
           </Select>
+          ,
         </div>
       </div>
-      <div>
-        <div style={styles.container}>
-          {countries.map(country => (
-            <Card
-              style={styles.card}
-              actions={[
-                <p>
-                  Deaths <p>{country.deaths}</p>
-                </p>,
-                <p>
-                  Critical <p>{country.critical}</p>
-                </p>,
-                <p>
-                  Recovered <p>{country.recovered}</p>
-                </p>
-              ]}
-            >
-              <Meta
-                avatar={
-                  <Avatar src="https://www.countryflags.io/be/flat/64.png" />
-                }
-                title={country.country}
-                description="This is the description"
-              />
-            </Card>
-          ))}
-        </div>
-      </div>
+      <Card
+        style={styles.card}
+        actions={[
+          <p>
+            Confirmed
+            <br />
+            {confirmed.value}
+          </p>,
+          <p>
+            Deaths
+            <br />
+            {deaths.value}
+          </p>,
+          <p>
+            Recovered
+            <br />
+            {recovered.value}
+          </p>,
+        ]}
+      >
+        {isLoading ? (
+          <Skeleton active paragraph={{ rows: 2 }} />
+        ) : (
+          <Meta
+            avatar={
+              <Avatar src="https://www.countryflags.io/{country}/flat/64.png" />
+            }
+            title={search}
+            description="This is the description"
+          />
+        )}
+      </Card>
     </div>
   );
 }

@@ -1,41 +1,41 @@
 import React from "react";
-import GetStats from "../utils/GetStats";
+import CountUp from "react-countup";
 
-export default function Overview() {
-  //const url = "https://corona.lmao.ninja/all";
-  const url = "https://covid19.mathdro.id/api";
-  const data = GetStats(url);
-
+const Overview = ({ confirmed, deaths, recovered }) => {
   const styles = {
     container: {
       backgroundColor: "#12191E",
-      color:"white"
+      color: "white",
     },
-    title: { textAlign: "center", marginTop:0, paddingTop:10 , color:"#F5F5F5"},
+    title: {
+      textAlign: "center",
+      marginTop: 0,
+      paddingTop: 10,
+      color: "#F5F5F5",
+    },
     cases: {
       display: "flex",
       flexDirection: "row",
       justifyContent: "space-around",
       flexWrap: "wrap",
-      backgroundColor: "#12191E"
+      backgroundColor: "#12191E",
     },
-    case: {
+    case: {},
+    confirmed: {
+      color: "#FFC108",
+      textAlign: "center",
     },
-    confirmed:{
-      color:"#FFC108",
-      textAlign: "center"
+    deaths: {
+      color: "#DC3545",
+      textAlign: "center",
     },
-    deaths:{
-      color:"#DC3545",
-      textAlign: "center"
+    recovered: {
+      color: "#28A745",
+      textAlign: "center",
     },
-    recovered:{
-      color:"#28A745",
-      textAlign: "center"
-    }
   };
 
-  if (!data) return <div>Loading...</div>;
+  if (!confirmed) return <div>Loading...</div>;
   return (
     <div style={styles.container}>
       <div style={styles.title}>
@@ -44,21 +44,42 @@ export default function Overview() {
       <div style={styles.cases}>
         <div style={styles.confirmed}>
           <h3 style={styles.confirmed}>Confirmed</h3>
-          <h1 style={styles.confirmed}>{data.confirmed.value}</h1>
+          <h1 style={styles.confirmed}>
+            <CountUp
+              start={0}
+              end={confirmed}
+              duration={1.5}
+              separator=","
+            />
+          </h1>
         </div>
         <div style={styles.deaths}>
           <h3 style={styles.deaths}>Deaths</h3>
-          <h1 style={styles.deaths}>{data.deaths.value}</h1>
+          <h1 style={styles.deaths}>
+            {" "}
+            <CountUp
+              start={0}
+              end={deaths}
+              duration={1.5}
+              separator=","
+            />
+          </h1>
         </div>
         <div style={styles.recovered}>
           <h3 style={styles.recovered}>Recovered</h3>
-          <h1 style={styles.recovered}>{data.recovered.value}</h1>
+          <h1 style={styles.recovered}>
+            {" "}
+            <CountUp
+              start={0}
+              end={recovered}
+              duration={1.5}
+              separator=","
+            />
+          </h1>
         </div>
-        {/* <div>
-          <h3>Updated</h3>
-          <span>{data.updated}</span>
-        </div> */}
       </div>
     </div>
   );
-}
+};
+
+export default Overview;
