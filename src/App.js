@@ -81,7 +81,8 @@ const Title = () => (
     variant="h1"
     component="h2"
     style={{
-      fontSize: "72px",
+      //fontSize: "72px",
+      fontSize: "3rem",
       color: "#404040",
     }}
   >
