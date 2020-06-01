@@ -10,6 +10,15 @@ function OverviewData({ confirmed, deaths, recovered }) {
       boxShadow: "4px 4px 31px 2px rgba(0, 0, 0, 0.10)",
       backgroundColor: "#fff",
     },
+    confirmed: {
+      color: "#FAC651",
+    },
+    deaths: {
+      color: "#F55661",
+    },
+    recovered: {
+      color: "#02D463",
+    },
   }));
 
   const classes = useStyles();
@@ -23,7 +32,13 @@ function OverviewData({ confirmed, deaths, recovered }) {
           </Typography>
           <br />
           <Typography component="body1" variant="h4">
-            <CountUp start={0} end={confirmed} duration={1.5} separator="," />
+            <CountUp
+              start={0}
+              end={confirmed}
+              duration={1.5}
+              separator=","
+              className={classes.confirmed}
+            />
           </Typography>
         </Paper>
       </Grid>
@@ -34,7 +49,13 @@ function OverviewData({ confirmed, deaths, recovered }) {
           </Typography>
           <br />
           <Typography component="body1" variant="h4">
-            <CountUp start={0} end={deaths} duration={1.5} separator="," />
+            <CountUp
+              start={0}
+              end={deaths}
+              duration={1.5}
+              separator=","
+              className={classes.deaths}
+            />
           </Typography>
         </Paper>
       </Grid>
@@ -45,7 +66,13 @@ function OverviewData({ confirmed, deaths, recovered }) {
           </Typography>
           <br />
           <Typography component="body1" variant="h4">
-            <CountUp start={0} end={recovered} duration={1.5} separator="," />
+            <CountUp
+              start={0}
+              end={recovered}
+              duration={1.5}
+              separator=","
+              className={classes.recovered}
+            />
           </Typography>
         </Paper>
       </Grid>

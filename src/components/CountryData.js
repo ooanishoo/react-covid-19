@@ -83,7 +83,7 @@ function CountryData({ countries }) {
               style={{ backgroundColor: "white" }}
               InputProps={{
                 ...params.InputProps,
-                className: classes.notchedOutline,
+                className: classes.input,
                 disableUnderline: true,
               }}
             />

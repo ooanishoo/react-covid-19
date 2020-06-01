@@ -33,6 +33,7 @@ function App() {
   const useStyles = makeStyles((theme) => ({
     container: {
       height: "100vh",
+      //backgroundColor: "#E1EBF1",
     },
     title: {
       fontSize: "72px",
@@ -43,6 +44,9 @@ function App() {
   let theme = createMuiTheme({
     typography: {
       fontFamily: "Spartan, sans-serif",
+    },
+    palette: {
+      primary: { main: "#fff" },
     },
   });
   theme = responsiveFontSizes(theme);
