@@ -5,7 +5,7 @@ export const fetchData = async () => {
   const response = await fetch(url);
   const json = await response.json();
 
-  console.log(json.confirmed.value, 'fetchering');
+  console.log(json.confirmed.value, "fetchering");
 
   //fetch list od countries
   const countries = await fetch(json.countries).then((response) =>
@@ -25,7 +25,7 @@ export const fetchData = async () => {
 // fetch country's data
 export const fetchCountryData = async (query) => {
   const url = `https://covid19.mathdro.id/api/countries/${query}`;
-  
+
   const response = await fetch(url);
   const json = await response.json();
 
