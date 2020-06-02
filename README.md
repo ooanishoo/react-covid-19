@@ -1,8 +1,7 @@
 ### Demo
 Click [here](https://ooanishoo.github.io/react-covid-19/) to see the demo !
 <img 
-style="box-shadow: 4px 4px 31px 2px rgba(0, 0, 0, 0.10)"
-src="https://user-images.githubusercontent.com/9260574/83579698-509a3580-a57d-11ea-9ef9-ad653eca87d1.jpg"/>
+src="https://user-images.githubusercontent.com/9260574/83580783-475e9800-a580-11ea-978c-130b9a0c683f.png"/>
 
 ## Getting Started
 
