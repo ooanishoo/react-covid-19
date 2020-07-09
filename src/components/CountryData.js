@@ -38,29 +38,22 @@ function CountryData({ countries }) {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleOnChange = (value) => {
-    console.log({ value }, "selected country");
     setSearch(value);
   };
 
   useEffect(() => {
-    console.log(search, "search is");
     if (search && search.trim !== "") {
       setIsLoading(true);
 
       setTimeout(() => {
         fetchCountryData(search.iso3)
           .then((data) => {
-            console.log({ data });
             setCountry(data);
           })
           .finally(setIsLoading(false));
       }, 100);
     }
   }, [search]);
-
-  useEffect(() => {
-    console.log({ country });
-  }, [country]);
 
   return (
     <Grid>
@@ -79,7 +72,6 @@ function CountryData({ countries }) {
               label="Search"
               fullWidth
               hiddenLabel
-              onClose={() => console.log("close")}
               style={{ backgroundColor: "white" }}
               InputProps={{
                 ...params.InputProps,
